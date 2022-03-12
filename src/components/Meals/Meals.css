@@ -1,0 +1,11 @@
+.meal-div{
+    padding: 20px;
+    background-color: antiquewhite;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+.meal-div img{
+    max-width: 70%;
+    border-radius: 10px;
+}

@@ -1,0 +1,11 @@
+.shop-section{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    max-width: 80%;
+    margin: auto;
+    margin-top: 120px;
+}
+.shop-meals{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}

@@ -1,0 +1,8 @@
+.detail-section{
+    background-color: rgb(238, 236, 223);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    box-shadow:  5px 10px 5px rgb(224, 224, 224);
+}
