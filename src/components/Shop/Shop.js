@@ -7,7 +7,7 @@ import { renderIntoDocument } from 'react-dom/test-utils';
 
 const Shop = () => {
 
-    const [text, setText] = useState([]);
+    const [text, setText] = useState(['a']);
     // console.log('Text:', text);
     const handleSearch = (x) => {
         const inputText = x.target.value;
