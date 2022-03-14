@@ -2,34 +2,72 @@ import React, { useEffect, useState } from 'react';
 import './Shop.css'
 import Meals from './../Meals/Meals';
 import Details from '../Details/Details';
+import { renderIntoDocument } from 'react-dom/test-utils';
 
 
 const Shop = () => {
-    const [meals, setMeals] = useState([]);
 
+    const [text, setText] = useState([]);
+    // console.log('Text:', text);
+    const handleSearch = (x) => {
+        const inputText = x.target.value;
+        setText(inputText);
+    };
+
+
+    const [meals, setMeals] = useState([]);
     useEffect(() => {
-        fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=a')
+        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`)
             .then(res => res.json())
-            .then(data => setMeals(data.meals))
-    }, []);
+            .then(data => {
+                if(data.meals.length > 0){
+                    setMeals(data.meals)
+                    setDisplayMeals(data.meals)
+                }
+            });
+    }, [text]);
+
 
     const [cart, setCart] = useState([]);
 
     const handleDetail = (props) => {
-        // console.log('props from handle:', props.strMeal);
-        // const newCart = [...cart, props];
+        // const newCart = [...cart, props.strMeal];
         setCart([...cart, props.strMeal])
-    }
+    };
+
+
+    const [displayMeals, setDisplayMeals] = useState([]);
+    const handleInput = (e) => {
+        const searchText = e.target.value;
+        const matchedText = meals.filter(x => x.strMeal.toLowerCase().includes(searchText.toLowerCase()));
+
+        setDisplayMeals(matchedText);
+    };
+
+
 
     return (
         <div className='shop-section'>
-            <div className='shop-meals'>
-            {
-                meals.map(x => <Meals z={x} key={x.idMeal} handleDetail={handleDetail}></Meals>)
-            }
+
+            <div>
+                <h1>Search by 'Wish':</h1>
+                <input onChange={handleSearch} type="text" />
             </div>
             <div>
-                <Details name={cart}></Details>
+                <h1>Filter form this page:</h1>
+                <input onChange={handleInput} type="text" />
+            </div>
+
+            <div>
+                <div className='shop-meals'>
+                    {
+                        displayMeals.map(x => <Meals
+                            z={x} key={x.idMeal} handleDetail={handleDetail} ></Meals>)
+                    }
+                </div>
+                <div>
+                    <Details name={cart}></Details>
+                </div>
             </div>
         </div>
     );

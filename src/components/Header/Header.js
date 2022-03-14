@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 import logo from '../../images/logo.png';
 
 const Header = () => {
+    // console.log('Header props?', props)
+    /* const [text, setText] = useState('');
+    console.log('TEXT:', text) */
+    // useEffect(()=>  ,[text]);
     return (
         <div className='header-class'>
             <div className='image-section'>
